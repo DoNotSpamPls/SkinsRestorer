@@ -3,11 +3,37 @@
 # Prefix that is send before each nonhelp message
 prefix: "&e[&2SkinsRestorer&e]"
 
+# === Help messages ===
+# info for /skin <skin>
+HELP_SKIN_SET: "Changes your skin."
+# info for /skin set <skin> <player>
+HELP_SKIN_SET_OTHER: "Changes the skin of another player."
+# info for /skin clear
+HELP_SKIN_CLEAR: "Clears your skin."
+# info for /skin clear <player>
+HELP_SKIN_CLEAR_OTHER: "Clears the skin of another player."
+# info for /skin update
+HELP_SKIN_UPDATE: "Updates your skin."
+# info for /skin update <player> 
+HELP_SKIN_UPDATE_OTHER: "Updates the skin of another player."
+# info for /sr reload
+HELP_SR_RELOAD: "Reloads the configuration file."
+# info for /sr status
+HELP_SR_STATUS: "Checks plugin needed API services"
+# info for /sr drop
+HELP_SR_DROP: "Drops the players skin data."
+# info for /sr props
+HELP_SR_PROPS: "Displays the players current skin as properties."
+
 # Message sent when the premium account with specified username does not exist
 notPremium: "&4Error&8: &cPremium player with that name does not exist."
 
 # String sent to player when they do not have permission to use a command
-playerNoPermission: "&4Error&8: &cYou don't have permission to do this."
+playerNoPermission: "&4Error&8: &cYou don't have permission to perform this command."
+
+playerNoPermissionskin: "&4Error&8: &cYou don't have permission to set this skin."
+
+playerNoPermissionurl: '&4Error&8: &cYou don't have permission to set skins by URL.'
 
 # Skinsrestorer cant update custom skins! Players should request skin again using /skin url
 ERRORUpdatingURL = "&4Error&8: &cYou can't update custom url skins! \n&cRequest again using /skin url."
@@ -21,13 +47,22 @@ skinChangeSuccess: "&2Your skin has been changed."
 # Message sent to player whose skin was cleared
 skinClearSuccess: "&2Your skin has been cleared."
 
-# Message sent to player that used /sr clear PLAYER command
+# Message sent to player that used /skin clear <player> command
 skinClearIssuer: "&2Skin cleared for player %player."
 
-# Message displayed when using /sr set command
+# Message displayed when using /skin set <skin> <player> command
 adminSetSkin: "&2You set %player's skin."
 
-# Message displayed when using /sr set command and providing an invalid username
+#uploading & processing custom skin to our services, waiting for returning the skin we can set
+MSUpdatingSkin: "&Processing skin, please wait..."
+
+# /skin update succes
+SuccesUpdatingSkin: "&2Your skin has been updated."
+
+# /skin update <player>, issuer / sender success message
+SuccesUpdatingSkinOther: "&2Skin updated for player %player."
+
+# Message displayed when using /skin set <skin> <player> command and providing an invalid username
 invalidPlayer: "&4Error&8: &c%player is not a valid username."
 
 # Message displayed when using /sr set command and providing username of a player that is currently not online
@@ -51,17 +86,18 @@ noSkinData: "&4Error&8: &cNo skin data acquired! Does this player have a skin?"
 # Cooldown message
 waitMinute: "&4Error&8: &cPlease wait a minute before requesting that skin again. (Rate Limited)"
 
-# When proxy returned skin is empty
+ErrorMSFULL: "&4MS Error&8: &cAPI timed out while uploading your skin. Please try again later. (MineSkin)"
+  
+ErrorMSGENERIC: "&4MS Error&8: &c%error%"
+
+# OLD: When proxy returned skin is empty
 genericError: "&4Error&8: &cAn error occurred while requesting skin data, please try again later!"
+
+# Error that occurs when trying to updating the skin 
+ErrorUpdatingSkin: "&4Error&8: &cAn error occurred while updating skin.\n &4Note&8: &cyou can &nnot update custom / URL skins&c!
 
 # Message sent when server has an outdated version of SR
 outdated: "&4You are running an outdated version of SkinsRestorer!\n&cPlease update to the latest version: \n&e-> https://skinsrestorer.net/get/latest"
-
-# Message sent when using a player-only command
-playersOnly: "&4These commands are only for players!"
-
-# When none Player try's to set a skin
-notPlayer: "&4Error&8: &cYou need to be a player!"
 
 # === GUI ===
 # /skins message
@@ -74,7 +110,7 @@ previusPage: "&e&l«&7 Previous Page&e&l «"
 nextPage: "&a&l»&7 Next Page&a&l »"
 
 # Clear skin [GUI]
-removeSkin: "&c&l»&7 Remove Skin&c&l »"
+removeSkin: "&c&lX &7Clear Skin&c&l X"
 
 # item lore for skulls [GUI]
 selectSkin: "&2Click to select this skin"
