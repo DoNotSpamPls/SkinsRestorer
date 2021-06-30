@@ -1,0 +1,82 @@
+---
+#Generated on 13.7.9 #
+#Prefix that is send before each nonhelp message
+prefix: "&e[&2SkinsRestorer&e]"
+#Message sent when the premium account with specified username does not exist
+notPremium: "&4Chyba&8: &cPlatený účet zo zadaným nickom neexistuje."
+#String sent to player when they do not have permission to use a command
+playerNoPermission: "&4Chyba&8: &cNa toto nemáš povolenie."
+#Skinsrestorer cant update custom skins! Players should request skin again using /skin url
+ERRORUpdatingURL = "&4Error&8: nemožno aktualizovať vlastné URL vzhľady! \n&cSkús znova pomocou /skin url."
+#Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+ERRORInvalidURLSKIN = "&4Error&8:
+  #Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+  skin url or format, \n&c try uploading your skin to imgur and right click copy imgurl \n&cFor guide see: \n&c&n&o https://github.com/SkinsRestorer/SkinsRestorerX/wiki/SkinURL."
+#Message sent to player whose skin was changed
+skinChangeSuccess: "&2Tvoj vzhľad sa zmenil."
+#Message sent to player whose skin was cleared
+skinClearSuccess: "&2Tvoj vzhľad bol vynulovaný."
+#Message sent to player that used /sr clear PLAYER command
+skinClearIssuer: "&2SVzhľad vynulovaný pre hráča %player."
+#Message displayed when using /sr set command
+adminSetSkin: "&2Nadstavil si vzhľad hráča %player."
+#Message displayed when using /sr set command and providing an invalid username
+invalidPlayer: "&4Chyba&8: &c%player neni platný nick."
+#Message displayed when using /sr set command and providing username of a player that is currently not online
+playerNotonline: "&4Chyba&8: &cHráč nie je online!"
+#Message displayed when using /sr drop command
+skinDataDropped: "&2Vzhľad hráča %player bol odstránený z knižnice."
+#Message sent when the /sr reload command execution was successful
+reload: "&2Konfiguračný a jazykový súbor bol znova načítaný!"
+#Message sent to player that is on cooldown when using /skin command too fast without having the skinsrestorer.bypasscooldown permission
+skinCooldownNew: "&4Chyba&8: &cMusíč čakať &e%s &csekúnd pre opätovné zmenie vzhľadu."
+#Message sent when a player wants to use a disabled skin without having the skinsrestorer.bypassdisabled permission
+skinDisabled: "&4Chyba&8: &ccTento vzľad je zakázaný správcom!"
+#Can not set skin due to player name not being premium or having no skin
+noSkinData: "&4Chyba&8: &cVzhľad tohoto hráča sa nepodarilo získať!"
+#Cooldown message
+waitMinute: "&4Chyba&8: &cProsím počkaj minútu, a vyskúšaj znova na získanie tohoto vzhľadu."
+#When proxy returned skin is empty
+genericError: "&4Chyba&8: &cNastala chyba pri získavaní daného vzhľadu! Skús to neskôr prosím."
+#Message sent when server has an outdated version of SR
+outdated: "&4Máte nainštalovanú starú verziu SkinsRestorera\n&cProsím sprav update tohto pluginu tu:\n&e-> https://skinsrestorer.net/get/latest"
+#Message sent when using a player-only command
+playersOnly: "&4Tieto príkazy je možné vykonávať len s pozície hráča!"
+#When none Player try's to set a skin
+notPlayer: "&4Chyba&8: &cNa toto musíš byť hráč!"
+#=== GUI ===
+#/skins message
+menuOpen: "&2Otváram knižnicu vzhľadov..."
+#Previus page [GUI]
+previusPage: "&e&l«&7 predchádzajúca strana&e&l «"
+#Next page [GUI]
+nextPage: "&a&l»&7 nasledujúca strana&a&l »"
+#Clear skin [GUI]
+removeSkin: "&c&l»&7 vymazať vzhľad&c&l »"
+#item lore for skulls [GUI]
+selectSkin: "&2klikni na vybratie tohoto vzhľadu"
+#=== DEBUG ===
+#old debug
+statusOk: "&2Pripojenie k Mojang API bolo úspešné!"
+#old debug
+altApiFailed: "&4Chyba&8: &cVzhľadové API je preťažené alebo nedostupné!"
+#=== OLD SKIN HELP ===
+#String used as a divider
+line: "&7&m----------------------------------------"
+#Message line sent when requesting SkinsRestorer help without skinsrestorer.cmds permission
+helpPlayer:
+  - "    &2&lSkinsRestorer &7- &f&lv%ver%"
+  - "    &2/skin set <skinname> &7-&f Zmení tvoj vzh¾ad"
+  - "    &2/skin <skinname> &7-&f skrátená verzia \"/skin set\"."
+  - "    &2/skin clear &7-&f Clears your skin."
+#Message line sent when requesting SkinsRestorer help and having skinsrestorer.cmds permission
+help: "    &2/sr &7- &fDisplay admin commands."
+#Message sent when requesting admin help
+help_admin:
+  - "&2&lSkinsRestorer &7- &f&lv%ver% &c&lAdmin"
+  - "    &2/sr config &7- &fnadstavenia configurácie "
+  - "    &2/sr set <hráè> <meno_skinu> &7- &fmení vzh¾ad daného hráèa"
+  - "    &2/sr drop <hráè> &7- &fpridá vzh¾ad daného hráèa do databázy"
+  - "    &2/sr clear <hráè> &7- &fodstráni vzh¾ad daného hráèa z databázy"
+  - "    &2/sr reload &7- &fZnova naèíta konfiguraèný a jazykový súbor pluginu"
+  - "    &2/sr props [player] &7- &fDisplays the players actual skin as properties"

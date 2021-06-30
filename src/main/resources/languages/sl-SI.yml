@@ -1,0 +1,82 @@
+---
+#Generated on 13.7.9 #
+#Prefix that is send before each nonhelp message
+prefix: "&e[&2SkinsRestorer&e]"
+#Message sent when the premium account with specified username does not exist
+notPremium: "&4Napaka&8: &cPremijski račun s takim imenom ne obstaja."
+#String sent to player when they do not have permission to use a command
+playerNoPermission: "&4Napaka&8: &cNimaš dovoljenja za izvedbo tega ukaza."
+#Skinsrestorer cant update custom skins! Players should request skin again using /skin url
+ERRORUpdatingURL = "&4Error&8: URL skin-ov ni mogoče posodobiti! \n&cUporabi ukaz /skin URL."
+#Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+ERRORInvalidURLSKIN = "&4Error&8:
+  #Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+  skin url or format, \n&c try uploading your skin to imgur and right click copy imgurl \n&cFor guide see: \n&c&n&o https://github.com/SkinsRestorer/SkinsRestorerX/wiki/SkinURL."
+#Message sent to player whose skin was changed
+skinChangeSuccess: "&2Tvoj skin je bil posodobljen."
+#Message sent to player whose skin was cleared
+skinClearSuccess: "&2Tvoj skin je bil ponastavljen."
+#Message sent to player that used /sr clear PLAYER command
+skinClearIssuer: "&2Skin igralca %player je bil ponastavljen."
+#Message displayed when using /sr set command
+adminSetSkin: "&2Skin igralca %player je posodobljen."
+#Message displayed when using /sr set command and providing an invalid username
+invalidPlayer: "&4Napaka&8: &c%player ni veljavno uporabniško ime."
+#Message displayed when using /sr set command and providing username of a player that is currently not online
+playerNotonline: "&4Napaka&8: &c%player ni online!"
+#Message displayed when using /sr drop command
+skinDataDropped: "&2Skin igralca %player je odstranjen."
+#Message sent when the /sr reload command execution was successful
+reload: "&2Konfiguracija ter prevodi so bili ponovno naloženi!"
+#Message sent to player that is on cooldown when using /skin command too fast without having the skinsrestorer.bypasscooldown permission
+skinCooldownNew: "&4Napaka&8: &cSkin-a ne mores posodobiti še &e%s &csekund."
+#Message sent when a player wants to use a disabled skin without having the skinsrestorer.bypassdisabled permission
+skinDisabled: "&4Napaka&8: &cTa skin je bil onemogočen s strani administratorjev."
+#Can not set skin due to player name not being premium or having no skin
+noSkinData: "&4Napaka&8: &cInformacij o skin-u ni bilo mogoče pridobiti! Ali igralec sploh ima skin?"
+#Cooldown message
+waitMinute: "&4Napaka&8: &cProsimo počakajte minuto pred ponovno zahtevo tega skin-a. (Stopenjska omejitev)"
+#When proxy returned skin is empty
+genericError: "&4Napaka&8: &cPrišlo je do napake med pridobivanjem informacij o skin-u, prosimo poskusite kasneje!"
+#Message sent when server has an outdated version of SR
+outdated: "&4V uporabi je zastarela verzija SkinsRestorer-ja!\n&cProsimo posodobite na zadnjo verzijo: \n&e-> https://skinsrestorer.net/get/latest"
+#Message sent when using a player-only command
+playersOnly: "&4Ti ukazi so izključno za igralce!"
+#When none Player try's to set a skin
+notPlayer: "&4Napaka&8: &cMoraš biti igralec!"
+#=== GUI ===
+#/skins message
+menuOpen: "&2Menu za izbiro skin-ov se odpira..."
+#Previus page [GUI]
+previusPage: "&e&l«&7 Prejšnja Stran&e&l «"
+#Next page [GUI]
+nextPage: "&a&l»&7 Naslednja Stran&a&l »"
+#Clear skin [GUI]
+removeSkin: "&c&l»&7 Odstrani Skin&c&l »"
+#item lore for skulls [GUI]
+selectSkin: "&2Klikni za izbiro skin-a"
+#=== DEBUG ===
+#old debug
+statusOk: "&2Povezava do Mojang API-ja je uspešna!"
+#old debug
+altApiFailed: "&4Napaka&8: &cSkin Data API je preobremenjen, prosimo poskusite kasneje!"
+#=== OLD SKIN HELP ===
+#String used as a divider
+line: "&7&m----------------------------------------"
+#Message line sent when requesting SkinsRestorer help without skinsrestorer.cmds permission
+helpPlayer:
+  - "    &2&lSkinsRestorer &7- &f&lv%ver%"
+  - "    &2/skin set <skinname> &7-&f Spremeni skin."
+  - "    &2/skin <skinname> &7-&f Krajša verzija ukaza \"/skin set\"."
+  - "    &2/skin clear &7-&f Clears your skin."
+#Message line sent when requesting SkinsRestorer help and having skinsrestorer.cmds permission
+help: "    &2/sr &7- &fDisplay admin commands."
+#Message sent when requesting admin help
+help_admin:
+  - "&2&lSkinsRestorer &7- &f&lv%ver% &c&lAdministracija"
+  - "    &2/sr config &7- &fStran s pomočjo za konfiguracijo v igri"
+  - "    &2/sr set <player> <skin name> &7- &fSpremeni skin določenega igralca"
+  - "    &2/sr drop <player> &7- &fOdstrani ter izbriše podatke skina določenega igralca."
+  - "    &2/sr clear <player> &7- &fOdstrani skin določenega igralca."
+  - "    &2/sr reload &7- &fPonovno naloži configuracijo ter prevode"
+  - "    &2/sr props [player] &7- &fDisplays the players actual skin as properties"

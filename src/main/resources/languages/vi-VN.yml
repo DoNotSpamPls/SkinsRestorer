@@ -1,0 +1,82 @@
+---
+#Generated on 13.7.9 #
+#Prefix that is send before each nonhelp message
+prefix: "&e[&2SkinsRestorer&e]"
+#Message sent when the premium account with specified username does not exist
+notPremium: "&4Lỗi&8: &cTài khoản Premium với tên đó không tồn tại."
+#String sent to player when they do not have permission to use a command
+playerNoPermission: "&4Lỗi&8: &cBạn không có quyền để làm điều này."
+#Skinsrestorer cant update custom skins! Players should request skin again using /skin url
+ERRORUpdatingURL = "&4Error&8: không thể update skin từ url! \n&cThử lại dùng /skin url."
+#Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+ERRORInvalidURLSKIN = "&4Error&8:
+  #Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+  skin url or format, \n&c try uploading your skin to imgur and right click copy imgurl \n&cFor guide see: \n&c&n&o https://github.com/SkinsRestorer/SkinsRestorerX/wiki/SkinURL."
+#Message sent to player whose skin was changed
+skinChangeSuccess: "&2Skin của bạn đã được thay đổi."
+#Message sent to player whose skin was cleared
+skinClearSuccess: "&2Đã xóa skin của bạn."
+#Message sent to player that used /sr clear PLAYER command
+skinClearIssuer: "&2Đã xóa skin của %player."
+#Message displayed when using /sr set command
+adminSetSkin: "&2Đã đặt skin của %player."
+#Message displayed when using /sr set command and providing an invalid username
+invalidPlayer: "&4Lỗi&8: &c%player không phải là tên hợp lệ."
+#Message displayed when using /sr set command and providing username of a player that is currently not online
+playerNotonline: "&4Lỗi&8: &cNgười chơi hiện không online!"
+#Message displayed when using /sr drop command
+skinDataDropped: "&2Đã xóa skin data cho %player."
+#Message sent when the /sr reload command execution was successful
+reload: "&2Đã reload lại Config và tệp Locale!"
+#Message sent to player that is on cooldown when using /skin command too fast without having the skinsrestorer.bypasscooldown permission
+skinCooldownNew: "&4Lỗi&8: &cBạn chỉ được thay đổi skin sau &e%s &cgiây."
+#Message sent when a player wants to use a disabled skin without having the skinsrestorer.bypassdisabled permission
+skinDisabled: "&4Lỗi&8: &cSkin này đã đã bị cấm bởi admin."
+#Can not set skin due to player name not being premium or having no skin
+noSkinData: "&4Lỗi&8: &cKhông nhận được skin data! Người chơi này đã có skin chưa?"
+#Cooldown message
+waitMinute: "&4Lỗi&8: &cVui lòng chờ trước khi yêu cầu lại skin. (Giới hạn yêu cầu)"
+#When proxy returned skin is empty
+genericError: "&4Lỗi&8: &cĐã có lỗi trong khi đang lấy skin data, vui lòng thử lại sau!"
+#Message sent when server has an outdated version of SR
+outdated: "&4Bạn đang dùng phiên bản cũ của SkinsRestorer!\n&cVui lòng cập nhật lên phiên bản mới nhất: \n&e-> https://skinsrestorer.net/get/latest"
+#Message sent when using a player-only command
+playersOnly: "&4Lệnh này chỉ được dùng cho người chơi!"
+#When none Player try's to set a skin
+notPlayer: "&4Lỗi&8: &cBạn cần phải là người chơi!"
+#=== GUI ===
+#/skins message
+menuOpen: "&2Đang mở menu skin..."
+#Previus page [GUI]
+previusPage: "&e&l«&7 Trang trước&e&l «"
+#Next page [GUI]
+nextPage: "&a&l»&7 Trang tiếp&a&l »"
+#Clear skin [GUI]
+removeSkin: "&c&l»&7 Xóa bỏ skin&c&l »"
+#item lore for skulls [GUI]
+selectSkin: "&2Click để chọn skin này"
+#=== DEBUG ===
+#old debug
+statusOk: "&2Kết nối tới Mojang API thành công!"
+#old debug
+altApiFailed: "&4Lỗi&8: &cAPI dữ liệu skin đang bị quá tải, vui lòng thử lại sau!"
+#=== OLD SKIN HELP ===
+#String used as a divider
+line: "&7&m----------------------------------------"
+#Message line sent when requesting SkinsRestorer help without skinsrestorer.cmds permission
+helpPlayer:
+  - "    &2&lSkinsRestorer &7- &f&lv%ver%"
+  - "    &2/skin set <skinname> &7-&f Changes your skin."
+  - "    &2/skin <skinname> &7-&f Shortened version of \"/skin set\"."
+  - "    &2/skin clear &7-&f Clears your skin."
+#Message line sent when requesting SkinsRestorer help and having skinsrestorer.cmds permission
+help: "    &2/sr &7- &fDisplay admin commands."
+#Message sent when requesting admin help
+help_admin:
+  - "&2&lSkinsRestorer &7- &f&lv%ver% &c&lAdmin"
+  - "    &2/sr config &7- &fhelp page for usefull in game config settings"
+  - "    &2/sr set <player> <skin name> &7- &fChanges the skin of a player.."
+  - "    &2/sr drop <player> &7- &fDrops player skin data."
+  - "    &2/sr clear <player> &7- &fClears player data."
+  - "    &2/sr reload &7- &fReloads the config and locale"
+  - "    &2/sr props [player] &7- &fDisplays the players actual skin as properties"

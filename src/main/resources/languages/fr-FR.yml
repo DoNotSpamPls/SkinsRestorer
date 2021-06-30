@@ -1,0 +1,82 @@
+---
+#Generated on 13.7.9 #
+#Prefix that is send before each nonhelp message
+prefix: "&e[&2SkinsRestorer&e]"
+#Message sent when the premium account with specified username does not exist
+notPremium: "&4Erreur&8 : &cAucun joueur premium avec ce nom n'existe."
+#String sent to player when they do not have permission to use a command
+playerNoPermission: "&4Erreur&8 : &cVous n'avez pas la permission de faire ça."
+#Skinsrestorer cant update custom skins! Players should request skin again using /skin url
+ERRORUpdatingURL = "&4Error&8: ne peut pas mettre à jour les skins d'url personnalisés ! \n&cRéessayez à nouveau en utilisant /skin url."
+#Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+ERRORInvalidURLSKIN = "&4Error&8:
+  #Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+  skin url or format, \n&c try uploading your skin to imgur and right click copy imgurl \n&cFor guide see: \n&c&n&o https://github.com/SkinsRestorer/SkinsRestorerX/wiki/SkinURL."
+#Message sent to player whose skin was changed
+skinChangeSuccess: "&2Votre skin a bien été changé."
+#Message sent to player whose skin was cleared
+skinClearSuccess: "&2Votre skin par défaut a bien été remis."
+#Message sent to player that used /sr clear PLAYER command
+skinClearIssuer: "&2Skin par défaut remis pour le joueur %player."
+#Message displayed when using /sr set command
+adminSetSkin: "&2Vous avez défini le skin de %player."
+#Message displayed when using /sr set command and providing an invalid username
+invalidPlayer: "&4Erreur&8 : &cLe pseudo %player n'est pas valide."
+#Message displayed when using /sr set command and providing username of a player that is currently not online
+playerNotonline: "&4Erreur&8 : &cCe joueur n'est pas en ligne !"
+#Message displayed when using /sr drop command
+skinDataDropped: "&2Les données du skin de %player ont été jetées."
+#Message sent when the /sr reload command execution was successful
+reload: "&2La configuration et les traductions ont bien été rafraîchies !"
+#Message sent to player that is on cooldown when using /skin command too fast without having the skinsrestorer.bypasscooldown permission
+skinCooldownNew: "&4Erreur&8 : &cVous pourrez à nouvrau changer votre skin dans &e%s &csecondes."
+#Message sent when a player wants to use a disabled skin without having the skinsrestorer.bypassdisabled permission
+skinDisabled: "&4Erreur&8 : &cCe skin a été désactivé par un administrateur."
+#Can not set skin due to player name not being premium or having no skin
+noSkinData: "&4Erreur&8 : &cAucune donnée de skin acquise ! Est-ce que ce joueur a un skin ?"
+#Cooldown message
+waitMinute: "&4Erreur&8 : &cVeuillez patienter une minute avant de demander à nouveau ce skin (Rate Limited)"
+#When proxy returned skin is empty
+genericError: "&4Erreur&8 : &cUne erreur s'est produite lors de la demande de données de skin, veuillez réessayer plus tard !"
+#Message sent when server has an outdated version of SR
+outdated: "&4Vous utilisez une version obsolète de SkinsRestorer !\n&cVeuillez mettre le plugin à jour : \n&e-> https://skinsrestorer.net/get/latest"
+#Message sent when using a player-only command
+playersOnly: "&4Ces commandes ne sont que pour les joueurs !"
+#When none Player try's to set a skin
+notPlayer: "&4Erreur&8 : &cVous devez être un joueur !"
+#=== GUI ===
+#/skins message
+menuOpen: "&2Ouverture du menu des skins..."
+#Previus page [GUI]
+previusPage: "&e&l«&7 Page précédente&e&l «"
+#Next page [GUI]
+nextPage: "&a&l»&7 Page suivante&a&l »"
+#Clear skin [GUI]
+removeSkin: "&c&l»&7 Enlever le skin&c&l »"
+#item lore for skulls [GUI]
+selectSkin: "&2Cliquez pour sélectionner ce skin"
+#=== DEBUG ===
+#old debug
+statusOk: "&2Connexion à l'API Mojang réussie !"
+#old debug
+altApiFailed: "&4Erreur&8 : &cL'API des données pour les skins est surchargée, veuillez réessayer plus tard !"
+#=== OLD SKIN HELP ===
+#String used as a divider
+line: "&7&m----------------------------------------"
+#Message line sent when requesting SkinsRestorer help without skinsrestorer.cmds permission
+helpPlayer:
+  - "    &2&lSkinsRestorer &7- &f&lv%ver%"
+  - "    &2/skin set <skinname> &7-&f Modifie votre skin."
+  - "    &2/skin <skinname> &7-&f Plus courte version de \"/skin set\"."
+  - "    &2/skin clear &7-&f Remet votre skin par défaut."
+#Message line sent when requesting SkinsRestorer help and having skinsrestorer.cmds permission
+help: "    &2/sr &7- &fAffiche les commandes d'administration."
+#Message sent when requesting admin help
+help_admin:
+  - "&2&lSkinsRestorer &7- &f&lv%ver% &c&lAdmin"
+  - "    &2/sr config &7- &fPage d'aide pour confgurer le plugin en jeu"
+  - "    &2/sr set <player> <skin name> &7- &fChange le skin d'un joueur."
+  - "    &2/sr drop <player> &7- &fJette les données du skin du joueur."
+  - "    &2/sr clear <player> &7- &fRemet le skin par défaut du joueur."
+  - "    &2/sr reload &7- &fRafraîchit la configuration et les traductions"
+  - "    &2/sr props [player] &7- &fAffiche le skin actuel des joueurs en tant que \"properties\""
