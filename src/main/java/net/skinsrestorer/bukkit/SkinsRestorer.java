@@ -33,6 +33,7 @@ import net.skinsrestorer.bukkit.commands.SkinCommand;
 import net.skinsrestorer.bukkit.commands.SrCommand;
 import net.skinsrestorer.bukkit.listener.PlayerJoin;
 import net.skinsrestorer.bukkit.utils.UpdateDownloaderGithub;
+import net.skinsrestorer.shared.exception.InitializeException;
 import net.skinsrestorer.shared.interfaces.ISRPlugin;
 import net.skinsrestorer.shared.serverinfo.Platform;
 import net.skinsrestorer.shared.storage.Config;
@@ -117,9 +118,13 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
         skinStorage = new SkinStorage(srLogger, mojangAPI);
         skinsRestorerAPI = new SkinsRestorerBukkitAPI(mojangAPI, skinStorage);
 
-        skinApplierBukkit = new SkinApplierBukkit(this, srLogger);
+        try {
+            skinApplierBukkit = new SkinApplierBukkit(this, srLogger);
+        } catch (InitializeException e) {
+            srLogger.severe(ChatColor.RED + ChatColor.UNDERLINE.toString() + "Could not initialize SkinApplier! Please report this on our discord server! ", e);
+        }
 
-        srLogger.info(ChatColor.GREEN + "Detected Minecraft " + ChatColor.YELLOW + ReflectionUtil.SERVER_VERSION + ChatColor.GREEN + ", using " + ChatColor.YELLOW + skinApplierBukkit.getClass().getSimpleName() + ChatColor.GREEN + ".");
+        srLogger.info(ChatColor.GREEN + "Detected Minecraft " + ChatColor.YELLOW + ReflectionUtil.SERVER_VERSION_STRING + ChatColor.GREEN + ", using " + ChatColor.YELLOW + skinApplierBukkit.getClass().getSimpleName() + ChatColor.GREEN + ".");
 
         if (getServer().getPluginManager().getPlugin("ViaVersion") != null) {
             try {

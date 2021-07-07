@@ -25,16 +25,18 @@ import li.cock.ie.reflect.DuckBypass;
 import net.skinsrestorer.shared.exception.EnumNotFoundException;
 import net.skinsrestorer.shared.exception.FieldNotFoundException;
 import net.skinsrestorer.shared.exception.ReflectionException;
-import org.bukkit.Bukkit;
+import net.skinsrestorer.shared.serverinfo.ServerVersion;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ReflectionUtil {
-    public static final String SERVER_VERSION;
+    public static final String SERVER_VERSION_STRING = ServerVersion.getNMSVersion();
+    public static final ServerVersion SERVER_VERSION;
     private static final DuckBypass reflect = new DuckBypass();
     private static final Map<Class<?>, Class<?>> builtInMap = new HashMap<>();
 
@@ -48,25 +50,20 @@ public class ReflectionUtil {
         builtInMap.put(Byte.class, Byte.TYPE);
         builtInMap.put(Short.class, Short.TYPE);
 
-        String srvVersion = null;
-        try {
-            Class.forName("org.bukkit.Bukkit");
-            srvVersion = Bukkit.getServer().getClass().getPackage().getName().substring(Bukkit.getServer().getClass().getPackage().getName().lastIndexOf('.') + 1);
-        } catch (ClassNotFoundException ignored) {
-        }
+        if (SERVER_VERSION_STRING == null) {
+            SERVER_VERSION = null;
+        } else {
+            String[] strings = SERVER_VERSION_STRING.replace("v", "").replace("R", "").split("_");
 
-        SERVER_VERSION = srvVersion;
+            SERVER_VERSION = new ServerVersion(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
+        }
     }
 
     private ReflectionUtil() {
     }
 
     public static Class<?> getBukkitClass(String clazz) throws ClassNotFoundException {
-        return Class.forName("org.bukkit.craftbukkit." + SERVER_VERSION + "." + clazz);
-    }
-
-    public static Class<?> getBungeeClass(String path, String clazz) throws ClassNotFoundException {
-        return Class.forName("net.md_5.bungee." + path + "." + clazz);
+        return Class.forName("org.bukkit.craftbukkit." + SERVER_VERSION_STRING + "." + clazz);
     }
 
     public static Class<?> getNMSClass(String clazz, String fullClassName) throws ReflectionException {
@@ -79,7 +76,7 @@ public class ReflectionUtil {
 
     private static Class<?> forNameWithFallback(String clazz, String fullClassName) throws ClassNotFoundException {
         try {
-            return Class.forName("net.minecraft.server." + SERVER_VERSION + "." + clazz);
+            return Class.forName("net.minecraft.server." + SERVER_VERSION_STRING + "." + clazz);
         } catch (ClassNotFoundException ignored) {
             return Class.forName(fullClassName);
         }
@@ -221,7 +218,7 @@ public class ReflectionUtil {
 
     public static Object invokeConstructor(Class<?> clazz, Object... initArgs) throws ReflectionException {
         try {
-            return getConstructor(clazz, toClassArray(initArgs)).newInstance(initArgs);
+            return getConstructorByArgs(clazz, initArgs).newInstance(initArgs);
         } catch (Exception e) {
             throw new ReflectionException(e);
         }
@@ -232,6 +229,32 @@ public class ReflectionUtil {
         c.setAccessible(true);
 
         return c;
+    }
+
+    private static Constructor<?> getConstructorByArgs(Class<?> clazz, Object... args) throws ReflectionException {
+        for (Constructor<?> constructor : clazz.getConstructors()) {
+            if (constructor.getParameterTypes().length != args.length)
+                continue;
+
+            int i = 0;
+            for (Class<?> parameter : constructor.getParameterTypes()) {
+                if (!isAssignable(parameter, args[i]))
+                    break;
+
+                i++;
+            }
+
+            if (i == args.length)
+                return constructor;
+        }
+
+        throw new ReflectionException("Could not find constructor with args " + Arrays.stream(args).map(Object::getClass).map(Class::getSimpleName).collect(Collectors.joining(", ")) + " in " + clazz.getSimpleName());
+    }
+
+    private static boolean isAssignable(Class<?> clazz, Object obj) {
+        clazz = convertToPrimitive(clazz);
+
+        return clazz.isInstance(obj) || clazz == convertToPrimitive(obj.getClass());
     }
 
     private static Class<?>[] toClassArray(Object[] args) {
@@ -274,9 +297,9 @@ public class ReflectionUtil {
         }
     }
 
-    public static Object invokeMethod(Object obj, String method, Object[] initargs) throws ReflectionException {
+    public static Object invokeMethod(Object obj, String method, Object[] initArgs) throws ReflectionException {
         try {
-            return Objects.requireNonNull(getMethod(obj.getClass(), method)).invoke(obj, initargs);
+            return Objects.requireNonNull(getMethod(obj.getClass(), method)).invoke(obj, initArgs);
         } catch (Exception e) {
             throw new ReflectionException(e);
         }

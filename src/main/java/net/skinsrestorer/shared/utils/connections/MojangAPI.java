@@ -70,8 +70,7 @@ public class MojangAPI {
             return new GenericProperty(name, value, signature);
 
         try {
-            return (IProperty) ReflectionUtil.invokeConstructor(propertyClass,
-                    new Class<?>[]{String.class, String.class, String.class}, name, value, signature);
+            return (IProperty) ReflectionUtil.invokeConstructor(propertyClass, name, value, signature);
         } catch (ReflectionException e) {
             e.printStackTrace();
         }

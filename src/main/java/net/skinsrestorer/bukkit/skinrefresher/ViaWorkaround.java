@@ -19,7 +19,7 @@
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-package net.skinsrestorer.bukkit.skinapplier;
+package net.skinsrestorer.bukkit.skinrefresher;
 
 import com.viaversion.viabackwards.protocol.protocol1_15_2to1_16.Protocol1_15_2To1_16;
 import com.viaversion.viaversion.api.Via;
@@ -32,7 +32,7 @@ import net.skinsrestorer.shared.utils.ReflectionUtil;
 import org.bukkit.entity.Player;
 import us.myles.ViaVersion.api.protocol.ProtocolRegistry;
 
-public class ViaWorkaround {
+public final class ViaWorkaround {
     private ViaWorkaround() {
     }
 

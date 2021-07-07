@@ -25,8 +25,9 @@ import io.papermc.lib.PaperLib;
 import lombok.RequiredArgsConstructor;
 import net.skinsrestorer.api.bukkit.events.SkinApplyBukkitEvent;
 import net.skinsrestorer.api.property.IProperty;
-import net.skinsrestorer.bukkit.skinapplier.PaperSkinRefresher;
-import net.skinsrestorer.bukkit.skinapplier.SpigotSkinRefresher;
+import net.skinsrestorer.bukkit.skinrefresher.PaperSkinRefresher;
+import net.skinsrestorer.bukkit.skinrefresher.SpigotSkinRefresher;
+import net.skinsrestorer.shared.exception.InitializeException;
 import net.skinsrestorer.shared.storage.Config;
 import net.skinsrestorer.shared.utils.ReflectionUtil;
 import net.skinsrestorer.shared.utils.log.SRLogger;
@@ -47,19 +48,19 @@ public class SkinApplierBukkit {
     private boolean enableDismountEntities;
     private boolean enableRemountPlayer;
 
-    public SkinApplierBukkit(SkinsRestorer plugin, SRLogger log) {
+    public SkinApplierBukkit(SkinsRestorer plugin, SRLogger log) throws InitializeException {
         this.plugin = plugin;
         this.log = log;
         refresh = detectRefresh(plugin);
     }
 
-    private Consumer<Player> detectRefresh(SkinsRestorer plugin) {
+    private Consumer<Player> detectRefresh(SkinsRestorer plugin) throws InitializeException {
         if (PaperLib.isPaper()) {
             // force SpigotSkinRefresher for unsupported plugins (ViaVersion & other ProtocolHack).
             // Ran with #getPlugin() != null instead of #isPluginEnabled() as older Spigot builds return false during the login process even if enabled
             boolean viaVersion = plugin.getServer().getPluginManager().getPlugin("ViaVersion") != null;
-            boolean protocolSupportExists = plugin.getServer().getPluginManager().getPlugin("ProtocolSupport") != null;
-            if (viaVersion || protocolSupportExists) {
+            boolean protocolSupport = plugin.getServer().getPluginManager().getPlugin("ProtocolSupport") != null;
+            if (viaVersion || protocolSupport) {
                 plugin.getSrLogger().info("Unsupported plugin (ViaVersion or ProtocolSupport) detected, forcing SpigotSkinRefresher");
                 return new SpigotSkinRefresher(plugin, log);
             }

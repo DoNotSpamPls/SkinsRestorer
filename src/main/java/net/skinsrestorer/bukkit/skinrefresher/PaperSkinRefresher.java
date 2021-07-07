@@ -19,9 +19,10 @@
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-package net.skinsrestorer.bukkit.skinapplier;
+package net.skinsrestorer.bukkit.skinrefresher;
 
 import lombok.SneakyThrows;
+import net.skinsrestorer.shared.exception.InitializeException;
 import net.skinsrestorer.shared.utils.ReflectionUtil;
 import net.skinsrestorer.shared.utils.log.SRLogger;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public final class PaperSkinRefresher implements Consumer<Player> {
     private final Method getHandleMethod;
     private Method healthUpdateMethod;
 
-    public PaperSkinRefresher(SRLogger logger) {
+    public PaperSkinRefresher(SRLogger logger) throws InitializeException {
         try {
             refreshPlayerMethod = ReflectionUtil.getBukkitClass("entity.CraftPlayer").getDeclaredMethod("refreshPlayer");
             refreshPlayerMethod.setAccessible(true);
@@ -51,7 +52,7 @@ public final class PaperSkinRefresher implements Consumer<Player> {
             logger.info("Using PaperSkinRefresher");
         } catch (Exception e) {
             logger.info("Failed PaperSkinRefresher");
-            throw new ExceptionInInitializerError(e);
+            throw new InitializeException(e);
         }
     }
 
