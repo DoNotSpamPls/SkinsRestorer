@@ -50,6 +50,7 @@ import net.skinsrestorer.shared.utils.log.console.BukkitConsoleImpl;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SingleLineChart;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -118,13 +119,13 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
 
         skinApplierBukkit = new SkinApplierBukkit(this, srLogger);
 
-        srLogger.info("§aDetected Minecraft §e" + ReflectionUtil.serverVersion + "§a, using §e" + skinApplierBukkit.getClass().getSimpleName() + "§a.");
+        srLogger.info(ChatColor.GREEN + "Detected Minecraft " + ChatColor.YELLOW + ReflectionUtil.SERVER_VERSION + ChatColor.GREEN + ", using " + ChatColor.YELLOW + skinApplierBukkit.getClass().getSimpleName() + ChatColor.GREEN + ".");
 
         if (getServer().getPluginManager().getPlugin("ViaVersion") != null) {
             try {
                 Class.forName("com.viaversion.viaversion.api.Via");
             } catch (ClassNotFoundException e) {
-                getServer().getScheduler().runTaskTimerAsynchronously(this, () -> srLogger.severe("Outdated ViaVersion found! Please update to at least ViaVersion 4.0.0 for SkinsRestorer to work again!"), 50, 20 * 60);
+                getServer().getScheduler().runTaskTimerAsynchronously(this, () -> srLogger.severe("Outdated ViaVersion found! Please update to at least ViaVersion 4.0.0 for SkinsRestorer to work again!"), 50, 20L * 60);
             }
         }
 
@@ -134,12 +135,12 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
                 YamlConfig mundoConfig = new YamlConfig(new File(getDataFolder().getParentFile(), "MundoSK"), "config.yml", false, srLogger);
                 mundoConfig.reload();
                 if (mundoConfig.getBoolean("enable_custom_skin_and_tablist")) {
-                    srLogger.warning("§4----------------------------------------------");
-                    srLogger.warning("§4             [CRITICAL WARNING]");
-                    srLogger.warning("§cWe have detected MundoSK on your server with §e'enable_custom_skin_and_tablist: §4§ntrue§e'§c.");
-                    srLogger.warning("§cThat setting is located in §e/plugins/MundoSK/config.yml");
-                    srLogger.warning("§cYou have to disable ('false') it to get SkinsRestorer to work!");
-                    srLogger.warning("§4----------------------------------------------");
+                    srLogger.warning(ChatColor.DARK_RED + "----------------------------------------------");
+                    srLogger.warning(ChatColor.DARK_RED + "             [CRITICAL WARNING]");
+                    srLogger.warning(ChatColor.RED + "We have detected MundoSK on your server with " + ChatColor.YELLOW + "'enable_custom_skin_and_tablist: " + ChatColor.DARK_RED + ChatColor.UNDERLINE + "true" + ChatColor.YELLOW + "' " + ChatColor.RED + ".");
+                    srLogger.warning(ChatColor.RED + "That setting is located in §e/plugins/MundoSK/config.yml");
+                    srLogger.warning(ChatColor.RED + "You have to disable ('false') it to get SkinsRestorer to work!");
+                    srLogger.warning(ChatColor.DARK_RED + "----------------------------------------------");
                 }
             } catch (Exception ignored) {
             }
@@ -154,15 +155,14 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
             updateDownloader = new UpdateDownloaderGithub(this);
             checkUpdate(bungeeEnabled, true);
 
-            Random rn = new Random();
-            int delayInt = 60 + rn.nextInt(240 - 60 + 1);
-            getServer().getScheduler().runTaskTimerAsynchronously(this, () -> checkUpdate(bungeeEnabled, false), 20 * 60 * delayInt, 20 * 60 * delayInt);
+            int delayInt = 60 + new Random().nextInt(240 - 60 + 1);
+            getServer().getScheduler().runTaskTimerAsynchronously(this, () -> checkUpdate(bungeeEnabled, false), 20L * 60 * delayInt, 20L * 60 * delayInt);
         } else {
             srLogger.info("Updater Disabled");
         }
 
         // Init SkinsGUI click listener even when on bungee
-        Bukkit.getPluginManager().registerEvents(new SkinsGUI(this), this);
+        Bukkit.getPluginManager().registerEvents(new SkinsGUI(this, srLogger), this);
 
         if (bungeeEnabled) {
             Bukkit.getMessenger().registerOutgoingPluginChannel(this, "sr:skinchange");
@@ -229,7 +229,7 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
 
                             skinList.forEach((name, property) -> newSkinList.put(name, mojangAPI.createProperty(property.getName(), property.getValue(), property.getSignature())));
 
-                            SkinsGUI skinsGUI = new SkinsGUI(this);
+                            SkinsGUI skinsGUI = new SkinsGUI(this, srLogger);
                             ++page; // start counting from 1
                             Inventory inventory = skinsGUI.getGUI(player, page, newSkinList);
 
@@ -330,7 +330,7 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
         skinCommand = new SkinCommand(this, srLogger);
         manager.registerCommand(skinCommand);
         manager.registerCommand(new SrCommand(this, srLogger));
-        manager.registerCommand(new GUICommand(this, new SkinsGUI(this)));
+        manager.registerCommand(new GUICommand(this, new SkinsGUI(this, srLogger)));
     }
 
     private boolean initStorage() {
@@ -394,7 +394,7 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
 
         File warning = new File(getDataFolder(), "(README) Use bungee config for settings! (README)");
         try {
-            if (!warning.exists() && bungeeEnabled) {
+            if (bungeeEnabled && !warning.exists()) {
                 //noinspection ResultOfMethodCallIgnored
                 warning.getParentFile().mkdirs();
                 //noinspection ResultOfMethodCallIgnored
@@ -405,8 +405,8 @@ public class SkinsRestorer extends JavaPlugin implements ISRPlugin {
                 }
             }
 
-            if (warning.exists() && !bungeeEnabled)
-                Files.delete(warning.toPath());
+            if (!bungeeEnabled)
+                Files.deleteIfExists(warning.toPath());
         } catch (Exception ignored) {
         }
 

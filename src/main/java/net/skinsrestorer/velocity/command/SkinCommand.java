@@ -29,7 +29,7 @@ import co.aikar.commands.velocity.contexts.OnlinePlayer;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
 import lombok.RequiredArgsConstructor;
-import net.kyori.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.skinsrestorer.api.PlayerWrapper;
 import net.skinsrestorer.api.exception.SkinRequestException;
 import net.skinsrestorer.shared.storage.Config;
@@ -68,7 +68,7 @@ public class SkinCommand extends BaseCommand {
     @HelpCommand
     @Syntax(" [help]")
     public void onHelp(CommandSource commandSource, CommandHelp help) {
-        if (Config.USE_OLD_SKIN_HELP)
+        if (Config.ENABLE_CUSTOM_HELP)
             sendHelp(commandSource);
         else
             help.showHelp();
@@ -172,11 +172,10 @@ public class SkinCommand extends BaseCommand {
     @Description("%helpSkinSet")
     @Syntax("%SyntaxSkinSet")
     public void onSkinSet(Player player, String[] skin) {
-        if (skin.length > 0) {
-            onSkinSetOther(player, new OnlinePlayer(player), skin[0], null);
-        } else {
+        if (skin.length == 0)
             throw new InvalidCommandArgument(true);
-        }
+
+        onSkinSetOther(player, new OnlinePlayer(player), skin[0], null);
     }
 
     @Subcommand("set")
@@ -189,13 +188,13 @@ public class SkinCommand extends BaseCommand {
             final Player player = target.getPlayer();
             if (Config.PER_SKIN_PERMISSIONS && !source.hasPermission("skinsrestorer.skin." + skin)) {
                 if (!source.hasPermission("skinsrestorer.ownskin") && !getSenderName(source).equalsIgnoreCase(player.getUsername()) || !skin.equalsIgnoreCase(getSenderName(source))) {
-                    source.sendMessage(LegacyComponentSerializer.legacy().deserialize(Locale.PLAYER_HAS_NO_PERMISSION_SKIN));
+                    source.sendMessage(LegacyComponentSerializer.legacySection().deserialize(Locale.PLAYER_HAS_NO_PERMISSION_SKIN));
                     return;
                 }
             }
 
             if (setSkin(source, player, skin, true, false, skinType) && (source != player)) {
-                source.sendMessage(LegacyComponentSerializer.legacy().deserialize(Locale.ADMIN_SET_SKIN.replace("%player", player.getUsername())));
+                source.sendMessage(LegacyComponentSerializer.legacySection().deserialize(Locale.ADMIN_SET_SKIN.replace("%player", player.getUsername())));
             }
         });
     }
@@ -207,11 +206,12 @@ public class SkinCommand extends BaseCommand {
     @Syntax("%SyntaxSkinUrl")
     @SuppressWarnings({"unused"})
     public void onSkinSetUrl(Player player, String url, @Optional SkinType skinType) {
-        if (C.validUrl(url)) {
-            onSkinSetOther(player, new OnlinePlayer(player), url, skinType);
-        } else {
-            player.sendMessage(LegacyComponentSerializer.legacy().deserialize(Locale.ERROR_INVALID_URLSKIN));
+        if (!C.validUrl(url)) {
+            player.sendMessage(LegacyComponentSerializer.legacySection().deserialize(Locale.ERROR_INVALID_URLSKIN));
+            return;
         }
+
+        onSkinSetOther(player, new OnlinePlayer(player), url, skinType);
     }
 
     private boolean setSkin(CommandSource source, Player player, String skin) {
@@ -309,7 +309,7 @@ public class SkinCommand extends BaseCommand {
     private void sendHelp(CommandSource commandSource) {
         if (!Locale.SR_LINE.isEmpty())
             commandSource.sendMessage(plugin.deserialize(Locale.SR_LINE));
-        commandSource.sendMessage(plugin.deserialize(Locale.HELP_PLAYER.replace("%ver%", plugin.getVersion())));
+        commandSource.sendMessage(plugin.deserialize(Locale.CUSTOM_HELP_IF_ENABLED.replace("%ver%", plugin.getVersion())));
         if (!Locale.SR_LINE.isEmpty())
             commandSource.sendMessage(plugin.deserialize(Locale.SR_LINE));
     }

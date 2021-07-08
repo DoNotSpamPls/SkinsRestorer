@@ -289,13 +289,11 @@ public class SkinStorage {
             name = removeForbiddenChars(name);
             File playerFile = new File(playersFolder, name + ".player");
 
-            if (playerFile.exists()) {
                 try {
-                    Files.delete(playerFile.toPath());
+                    Files.deleteIfExists(playerFile.toPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
         }
     }
 
@@ -314,13 +312,11 @@ public class SkinStorage {
             name = removeForbiddenChars(name);
             File skinFile = new File(skinsFolder, name + ".skin");
 
-            if (skinFile.exists()) {
                 try {
-                    Files.delete(skinFile.toPath());
+                    Files.deleteIfExists(skinFile.toPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
         }
     }
 
@@ -546,7 +542,7 @@ public class SkinStorage {
     }
 
     /**
-     * @param name
+     * @param name Skin name
      * @return True on updated
      * @throws SkinRequestException On updating disabled OR invalid username + api error
      */
@@ -557,12 +553,12 @@ public class SkinStorage {
             throw new SkinRequestException(Locale.ERROR_UPDATING_CUSTOMSKIN);
 
         // Check if updating is disabled for skin (by timestamp = 0)
-        String timestamp = "";
+        boolean updateDisabled = false;
         if (Config.MYSQL_ENABLED) {
             RowSet crs = mysql.query("SELECT timestamp FROM " + Config.MYSQL_SKINTABLE + " WHERE Nick=?", name);
             if (crs != null)
                 try {
-                    timestamp = crs.getString("timestamp");
+                    updateDisabled = crs.getString("timestamp").equals("0");
                 } catch (Exception ignored) {
                 }
         } else {
@@ -572,15 +568,13 @@ public class SkinStorage {
             File skinFile = new File(skinsFolder, name + ".skin");
 
             try {
-                if (!skinFile.exists()) {
-                    timestamp = "";
-                } else {
+                if (skinFile.exists()) {
                     try (BufferedReader buf = new BufferedReader(new FileReader(skinFile))) {
                         for (int i = 0; i < 3; i++) {
                             String line = buf.readLine();
 
                             if (i == 2)
-                                timestamp = line;
+                                updateDisabled = line.equals("0");
                         }
                     }
                 }
@@ -588,7 +582,7 @@ public class SkinStorage {
             }
         }
 
-        if (timestamp.equals("0"))
+        if (updateDisabled)
             throw new SkinRequestException(Locale.ERROR_UPDATING_CUSTOMSKIN);
 
         // Update Skin
@@ -630,7 +624,7 @@ public class SkinStorage {
         player = player.replaceAll("^\\\\s+", "");
         player = player.replaceAll("\\\\s+$", "");
 
-        if (Config.DEFAULT_SKINS_ENABLED && !Config.DEFAULT_SKINS.isEmpty()) {
+        if (Config.DEFAULT_SKINS_ENABLED) {
             // don't return default skin name for premium players if enabled
             if (!Config.DEFAULT_SKINS_PREMIUM) {
                 // check if player is premium

@@ -21,7 +21,7 @@
  */
 package net.skinsrestorer.shared.exception;
 
-public class FieldNotFoundException extends Exception {
+public class FieldNotFoundException extends ReflectiveOperationException {
     public FieldNotFoundException(String message) {
         super(message);
     }

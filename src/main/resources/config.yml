@@ -34,7 +34,7 @@ SkinWithoutPerm: true
 SkinChangeCooldown: 30
 SkinErrorCooldown: 5
 
-  #################
+#################
 # Customization #
 #################
 
@@ -42,7 +42,7 @@ SkinErrorCooldown: 5
 
 # True will  make use of the 'HELP_PLAYER' & `SR_LINE` in messages.yml.
 # This is more customizable, but at the cost of permission specific help.
-UseOldSkinHelp: false
+EnableCustomHelp: false
 
 #Ignore messages.yml 'PREFIX ='
 DisablePrefix: false
@@ -76,9 +76,9 @@ CustomGUI:
     - "xknat"
     - "McLive"
 
-  ############
-  # Advanced #
-  ############
+############
+# Advanced #
+############
 
 # Below Config options are OPTIONAL and are irrelevant for small servers.
 
@@ -130,9 +130,9 @@ RestrictSkinUrls:
 # Here you can fill in your APIKey for lower MineSkin request times.
 # Key can be requested from https://mineskin.org/apikey
 # ((?) not needed for small servers / those not using the SkinUrl api (?))
-MineskinAPIKey: null
+MineskinAPIKey: "key"
 
-  #################
+#################
 # Compatibility #
 #################
 
@@ -148,7 +148,7 @@ RemountPlayerOnSkinUpdate: true
 # Dismounts all passengers mounting a player (such as plugins that let you ride another player), preventing those players from becoming desynced.
 DismountPassengersOnSkinUpdate: false
 
-  ###############
+###############
 # Danger Zone #
 ###############
 

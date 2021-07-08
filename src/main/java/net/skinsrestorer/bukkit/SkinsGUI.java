@@ -48,13 +48,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SkinsGUI extends ItemStack implements Listener {
     @Getter
     private static final Map<String, Integer> menus = new ConcurrentHashMap<>();
-    @Getter
-    private final SRLogger srLogger;
     private final SkinsRestorer plugin;
+    @Getter
+    private final SRLogger log;
 
-    public SkinsGUI(SkinsRestorer plugin) {
+    public SkinsGUI(SkinsRestorer plugin, SRLogger log) {
         this.plugin = plugin;
-        srLogger = plugin.getSrLogger();
+        this.log = log;
     }
 
     public Inventory getGUI(Player player, int page, Map<String, Object> skinsList) {
@@ -101,8 +101,8 @@ public class SkinsGUI extends ItemStack implements Listener {
 
         skinsList.forEach((name, property) -> {
             if (name.chars().anyMatch(i -> Character.isLetter(i) && Character.isUpperCase(i))) {
-                srLogger.info("ERROR: skin " + name + ".skin contains a Upper case!");
-                srLogger.info("Please rename the file name to a lower case!.");
+                log.info("ERROR: skin " + name + ".skin contains a Upper case!");
+                log.info("Please rename the file name to a lower case!.");
                 return;
             }
 
@@ -142,7 +142,7 @@ public class SkinsGUI extends ItemStack implements Listener {
         try {
             BukkitHeadAPI.setSkull(is, ((Property) property).getValue());
         } catch (Exception e) {
-            srLogger.info("ERROR: could not add '" + name + "' to SkinsGUI, skin might be corrupted or invalid!");
+            log.info("ERROR: could not add '" + name + "' to SkinsGUI, skin might be corrupted or invalid!");
             e.printStackTrace();
         }
 

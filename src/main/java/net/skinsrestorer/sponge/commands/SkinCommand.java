@@ -66,7 +66,7 @@ public class SkinCommand extends BaseCommand {
     @HelpCommand
     @Syntax(" [help]")
     public void onHelp(CommandSource source, CommandHelp help) {
-        if (Config.USE_OLD_SKIN_HELP)
+        if (Config.ENABLE_CUSTOM_HELP)
             sendHelp(source);
         else
             help.showHelp();
@@ -169,11 +169,10 @@ public class SkinCommand extends BaseCommand {
     @Description("%helpSkinSet")
     @Syntax("%SyntaxSkinSet")
     public void onSkinSet(Player player, String[] skin) {
-        if (skin.length > 0) {
-            onSkinSetOther(player, new OnlinePlayer(player), skin[0], null);
-        } else {
+        if (skin.length == 0)
             throw new InvalidCommandArgument(true);
-        }
+
+        onSkinSetOther(player, new OnlinePlayer(player), skin[0], null);
     }
 
     @Subcommand("set")
@@ -202,11 +201,12 @@ public class SkinCommand extends BaseCommand {
     @Syntax("%SyntaxSkinUrl")
     @SuppressWarnings({"unused"})
     public void onSkinSetUrl(Player player, String url, @Optional SkinType skinType) {
-        if (C.validUrl(url)) {
-            onSkinSetOther(player, new OnlinePlayer(player), url, skinType);
-        } else {
+        if (!C.validUrl(url)) {
             player.sendMessage(plugin.parseMessage(Locale.ERROR_INVALID_URLSKIN));
+            return;
         }
+
+        onSkinSetOther(player, new OnlinePlayer(player), url, skinType);
     }
 
     private boolean setSkin(CommandSource source, Player player, String skin) {
@@ -293,7 +293,7 @@ public class SkinCommand extends BaseCommand {
     private void sendHelp(CommandSource source) {
         if (!Locale.SR_LINE.isEmpty())
             source.sendMessage(plugin.parseMessage(Locale.SR_LINE));
-        source.sendMessage(plugin.parseMessage(Locale.HELP_PLAYER.replace("%ver%", plugin.getVersion())));
+        source.sendMessage(plugin.parseMessage(Locale.CUSTOM_HELP_IF_ENABLED.replace("%ver%", plugin.getVersion())));
         if (!Locale.SR_LINE.isEmpty())
             source.sendMessage(plugin.parseMessage(Locale.SR_LINE));
     }

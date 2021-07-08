@@ -4,7 +4,7 @@
 
     <groupId>net.skinsrestorer</groupId>
     <artifactId>skinsrestorer</artifactId>
-    <version>14.1.1</version>
+    <version>14.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>SkinsRestorer</name>
@@ -297,7 +297,7 @@
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>1.1.8</version>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <!-- Mojang Auth Library (needed for SkinsGUI) -->
@@ -392,7 +392,7 @@
         <dependency>
             <groupId>com.viaversion</groupId>
             <artifactId>viabackwards-common</artifactId>
-            <version>4.0.0</version>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
         <!-- ViaVersion -->
@@ -406,7 +406,7 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>8.1.0</version>
+            <version>8.2.0</version>
         </dependency>
         <!-- PaperLib -->
         <dependency>

@@ -21,12 +21,8 @@
  */
 package net.skinsrestorer.shared.exception;
 
-public class ReflectionException extends ReflectiveOperationException {
-    public ReflectionException(String message) {
+public class EnumNotFoundException extends ReflectiveOperationException {
+    public EnumNotFoundException(String message) {
         super(message);
-    }
-
-    public ReflectionException(Exception e) {
-        super(e);
     }
 }

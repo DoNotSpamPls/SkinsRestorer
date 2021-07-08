@@ -53,7 +53,7 @@ public class MineSkinAPI {
     private final Queue<UUID> queue = new LinkedList<>();
     private final Map<UUID, AtomicInteger> fails = new HashMap<>();
 
-    public IProperty genSkin(String url, String skinType, @Nullable UUID methodUUID) throws SkinRequestException {
+    public IProperty genSkin(String url, @Nullable String skinType, @Nullable UUID methodUUID) throws SkinRequestException {
         if (methodUUID == null) {
             methodUUID = UUID.randomUUID();
             queue.add(methodUUID);
@@ -68,7 +68,7 @@ public class MineSkinAPI {
 
         try {
             if (queue.element().equals(methodUUID)) {
-                String skinVariant = skinType.equalsIgnoreCase("steve") || skinType.equalsIgnoreCase("slim") ? "&variant=" + skinType : "";
+                String skinVariant = skinType != null && (skinType.equalsIgnoreCase("steve") || skinType.equalsIgnoreCase("slim")) ? "&variant=" + skinType : "";
 
                 try {
                     final String output = queryURL("url=" + URLEncoder.encode(url, "UTF-8") + skinVariant);
@@ -170,7 +170,7 @@ public class MineSkinAPI {
                 con.setDoOutput(true);
                 con.setDoInput(true);
 
-                if (!Config.MINESKIN_API_KEY.equals("null"))
+                if (!Config.MINESKIN_API_KEY.isEmpty())
                     con.setRequestProperty("Authorization", Config.MINESKIN_API_KEY);
 
                 DataOutputStream output = new DataOutputStream(con.getOutputStream());

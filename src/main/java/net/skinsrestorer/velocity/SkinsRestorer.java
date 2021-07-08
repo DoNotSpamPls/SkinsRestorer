@@ -106,7 +106,7 @@ public class SkinsRestorer implements ISRPlugin {
 
         // Check for updates
         if (!updaterDisabled.exists()) {
-            updateChecker = new UpdateCheckerGitHub(2124, getVersion(), getSrLogger(), "SkinsRestorerUpdater/Velocity");
+            updateChecker = new UpdateCheckerGitHub(2124, getVersion(), srLogger, "SkinsRestorerUpdater/Velocity");
             checkUpdate(true);
 
             Random rn = new Random();
@@ -129,7 +129,7 @@ public class SkinsRestorer implements ISRPlugin {
             return;
 
         // Init listener
-        proxy.getEventManager().register(this, new GameProfileRequest(this));
+        proxy.getEventManager().register(this, new GameProfileRequest(this, srLogger));
 
         // Init commands
         initCommands();

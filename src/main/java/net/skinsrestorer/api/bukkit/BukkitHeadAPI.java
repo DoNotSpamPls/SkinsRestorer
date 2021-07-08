@@ -24,6 +24,7 @@ package net.skinsrestorer.api.bukkit;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
+import net.skinsrestorer.shared.exception.FieldNotFoundException;
 import net.skinsrestorer.shared.utils.ReflectionUtil;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -51,7 +52,7 @@ public class BukkitHeadAPI {
 
         try {
             ReflectionUtil.getField(headMetaClass, "profile", GameProfile.class, 0).set(headMeta, profile);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
+        } catch (FieldNotFoundException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

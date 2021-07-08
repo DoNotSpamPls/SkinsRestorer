@@ -34,9 +34,9 @@ public class GameProfileRequest {
     private final SRLogger log;
 
     @Inject
-    public GameProfileRequest(SkinsRestorer plugin) {
+    public GameProfileRequest(SkinsRestorer plugin, SRLogger log) {
         this.plugin = plugin;
-        log = plugin.getSrLogger();
+        this.log = log;
     }
 
     // TODO: make async, add #getSkinForPlayer()

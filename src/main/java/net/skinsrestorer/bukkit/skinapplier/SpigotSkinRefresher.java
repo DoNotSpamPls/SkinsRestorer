@@ -31,11 +31,13 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class SpigotSkinRefresher implements Consumer<Player> {
+public final class SpigotSkinRefresher implements Consumer<Player> {
     private final SkinsRestorer plugin;
     private Class<?> playOutRespawn;
     private Class<?> playOutPlayerInfo;
@@ -135,7 +137,9 @@ public class SpigotSkinRefresher implements Consumer<Player> {
             Object playerIntManager = ReflectionUtil.getFieldByType(craftHandle, "PlayerInteractManager");
             Enum<?> enumGamemode = (Enum<?>) ReflectionUtil.invokeMethod(playerIntManager, "getGameMode");
 
+            //noinspection deprecation
             int gamemodeId = player.getGameMode().getValue();
+            //noinspection deprecation
             int dimension = environment.getId();
 
             Object respawn;
@@ -144,7 +148,7 @@ public class SpigotSkinRefresher implements Consumer<Player> {
             } catch (Exception ignored) {
                 // 1.13.x needs the dimensionManager instead of dimension id
                 Object worldObject = ReflectionUtil.getFieldByType(craftHandle, "World");
-                Object dimensionManager = ReflectionUtil.getFieldByType(worldObject, "DimensionManager");
+                Object dimensionManager = getDimensionManager(worldObject, dimension);
 
                 try {
                     respawn = ReflectionUtil.invokeConstructor(playOutRespawn, dimensionManager, difficulty, worldType, enumGamemode);
@@ -165,15 +169,18 @@ public class SpigotSkinRefresher implements Consumer<Player> {
                             Object dimensionKey = ReflectionUtil.invokeMethod(worldObject, "getDimensionKey");
                             boolean debug = (boolean) ReflectionUtil.invokeMethod(worldObject, "isDebugWorld");
                             boolean flat = (boolean) ReflectionUtil.invokeMethod(worldObject, "isFlatWorld");
+                            List<Object> gameModeList = ReflectionUtil.getFieldByTypeList(playerIntManager, "EnumGamemode");
+
+                            Enum<?> enumGamemodePrevious = (Enum<?>) getFromListExcluded(gameModeList, enumGamemode);
 
                             // Minecraft 1.16.1 changes
                             try {
                                 Object typeKey = ReflectionUtil.invokeMethod(worldObject, "getTypeKey");
 
-                                respawn = ReflectionUtil.invokeConstructor(playOutRespawn, typeKey, dimensionKey, seedEncrypted, enumGamemode, enumGamemode, debug, flat, true);
+                                respawn = ReflectionUtil.invokeConstructor(playOutRespawn, typeKey, dimensionKey, seedEncrypted, enumGamemode, enumGamemodePrevious, debug, flat, true);
                             } catch (Exception ignored6) {
                                 // Minecraft 1.16.2 changes
-                                respawn = ReflectionUtil.invokeConstructor(playOutRespawn, dimensionManager, dimensionKey, seedEncrypted, enumGamemode, enumGamemode, debug, flat, true);
+                                respawn = ReflectionUtil.invokeConstructor(playOutRespawn, dimensionManager, dimensionKey, seedEncrypted, enumGamemode, enumGamemodePrevious, debug, flat, true);
                             }
                         }
                     }
@@ -241,5 +248,35 @@ public class SpigotSkinRefresher implements Consumer<Player> {
         } catch (ReflectionException e) {
             e.printStackTrace();
         }
+    }
+
+    private Object getFromListExcluded(List<Object> list, Object... excluded) {
+        for (Object obj : list) {
+            if (obj != excluded)
+                return obj;
+        }
+
+        return null;
+    }
+
+    private Object getDimensionManager(Object worldObject, int dimension) throws ReflectionException {
+        try {
+            return ReflectionUtil.getFieldByType(worldObject, "DimensionManager");
+        } catch (ReflectionException e) {
+            try {
+                Class<?> dimensionManagerClass = ReflectionUtil.getNMSClass("DimensionManager", "net.minecraft.world.level.dimension.DimensionManager");
+
+                for (Method m : dimensionManagerClass.getDeclaredMethods()) {
+                    if (m.getReturnType() == dimensionManagerClass && m.getParameterCount() == 1 && m.getParameterTypes()[0] == Integer.TYPE) {
+                        m.setAccessible(true);
+                        return m.invoke(null,dimension );
+                    }
+                }
+            } catch (InvocationTargetException | IllegalAccessException e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        throw new ReflectionException("Could not get DimensionManager from " + worldObject.getClass().getSimpleName());
     }
 }

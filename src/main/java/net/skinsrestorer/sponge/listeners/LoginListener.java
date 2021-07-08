@@ -34,9 +34,9 @@ public class LoginListener implements EventListener<ClientConnectionEvent.Auth> 
     private final SkinsRestorer plugin;
     private final SRLogger log;
 
-    public LoginListener(SkinsRestorer plugin) {
+    public LoginListener(SkinsRestorer plugin, SRLogger log) {
         this.plugin = plugin;
-        log = plugin.getSrLogger();
+        this.log = log;
     }
 
     @Override

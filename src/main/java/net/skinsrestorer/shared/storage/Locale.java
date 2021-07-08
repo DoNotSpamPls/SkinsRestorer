@@ -101,7 +101,7 @@ public class Locale {
     public static String RELOAD = "&2Config and Locale has been reloaded!";
     public static String OUTDATED = "&4You are running an outdated version of SkinsRestorer!\n&cPlease update to the latest version on Spigot: \n&ehttps://www.spigotmc.org/resources/skinsrestorer.2124/";
     public static String SR_LINE = "&7&m----------------------------------------";
-    public static String HELP_PLAYER = "  &2&lSkinsRestorer &7- &f&lv%ver%"
+    public static String CUSTOM_HELP_IF_ENABLED = "  &2&lSkinsRestorer &7- &f&lv%ver%"
             + "\n   &2/skin <skinname> &7-&f Changes your skin."
             + "\n    &2/skin update &7-&f Updates your skin."
             + "\n    &2/skin clear &7-&f Clears your skin.";
@@ -113,7 +113,6 @@ public class Locale {
             locale.reload();
 
             for (Field f : Locale.class.getFields()) {
-
                 if (f.getType() != String.class)
                     continue;
 
