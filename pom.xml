@@ -248,6 +248,10 @@
             <id>viaversion</id>
             <url>https://repo.viaversion.com</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -365,9 +369,9 @@
         </dependency>
         <!-- ACF for velocity -->
         <dependency>
-            <groupId>co.aikar</groupId>
+            <groupId>com.github.AlexProgrammerDE.commands</groupId>
             <artifactId>acf-velocity</artifactId>
-            <version>0.5.0-SNAPSHOT</version>
+            <version>4da0ffec3c</version>
         </dependency>
         <!-- gson -->
         <dependency>
