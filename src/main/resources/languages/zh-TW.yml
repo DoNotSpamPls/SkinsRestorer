@@ -1,91 +1,102 @@
 ---
+#Generated on 13.7.9 #
+#Prefix that is send before each nonhelp message
+prefix: "&e[&2SkinsRestorer&e]"
 #Message sent when the premium account with specified username does not exist
-notPremium:
-  #Message sent when the premium account with specified username does not exist
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cPremium player with that name does not exist.";'
+#notPremium: "&4錯誤&8: &c不存在具有該名稱的玩家。"
+notPremium: "&4\u932f\u8aa4&8: &c\u4e0d\u5b58\u5728\u5177\u6709\u8a72\u540d\u7a31\u7684\u73a9\u5bb6\u3002"
 #String sent to player when they do not have permission to use a command
-playerNoPermission:
-  #String sent to player when they do not have permission to use a command
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cYou don''t have permission to do this.";'
+#playerNoPermission: "&4錯誤&8: &c你沒有權限使用此指令！"
+playerNoPermission: "&4\u932f\u8aa4&8: &c\u4f60\u6c92\u6709\u6b0a\u9650\u4f7f\u7528\u6b64\u6307\u4ee4\uff01"
+#Skinsrestorer cant update custom skins! Players should request skin again using /skin url
+#ERRORUpdatingURL = "&4Error&8: 無法從此連結下載外觀！ \n&c請嘗試重新輸入 /skin url 指令"
+ERRORUpdatingURL = "&4Error&8: \u7121\u6cd5\u5f9e\u6b64\u9023\u7d50\u4e0b\u8f09\u5916\u89c0\uff01 \n&c\u8acb\u5617\u8a66\u91cd\u65b0\u8f38\u5165 /skin url \u6307\u4ee4"
+#Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+ERRORInvalidURLSKIN = "&4Error&8:
+  #Error when try try to to do /skin ulr with a INVALID url. they should use imgur or see the guide using the link.
+  skin url or format, \n&c try uploading your skin to imgur and right click copy imgurl \n&cFor guide see: \n&c&n&o https://github.com/SkinsRestorer/SkinsRestorerX/wiki/SkinURL."
 #Message sent to player whose skin was changed
-skinChangeSuccess: "\"&e[&2SkinsRestorer&e] &2Your skin has been changed.\";"
+#skinChangeSuccess: "&2你的外觀已改變。"
+skinChangeSuccess: "&2\u4f60\u7684\u5916\u89c0\u5df2\u6539\u8b8a\u3002"
 #Message sent to player whose skin was cleared
-skinClearSuccess: "\"&e[&2SkinsRestorer&e] &2Your skin has been cleared.\";"
+#skinClearSuccess: "&2你的外觀已刪除。"
+skinClearSuccess: "&2你\u7684\u5916\u89c0\u5df2\u522a\u9664\u3002"
 #Message sent to player that used /sr clear PLAYER command
-skinClearIssuer: "\"&e[&2SkinsRestorer&e] &2Skin cleared for player %player.\";"
+#skinClearIssuer: "&2已為&2 %player 清除外觀。"
+skinClearIssuer: "&2\u5df2\u70ba&2 %player \u6e05\u9664\u5916\u89c0\u3002"
 #Message displayed when using /sr set command
-adminSetSkin: "\"&e[&2SkinsRestorer&e] &2You set %player's skin.\";"
+#adminSetSkin: "&2你為 %player 自訂了外觀。"
+adminSetSkin: "&2\u4f60\u70ba %player \u81ea\u8a02\u4e86\u5916\u89c0\u3002"
 #Message displayed when using /sr set command and providing an invalid username
-invalidPlayer:
-  #Message displayed when using /sr set command and providing an invalid username
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&c%player is not a valid username.";'
+#invalidPlayer: "&4錯誤&8: &c%player 不是有效的玩家名稱"
+invalidPlayer: "&4\u932f\u8aa4&8: &c%player \u4e0d\u662f\u6709\u6548\u7684\u73a9\u5bb6\u540d\u7a31"
 #Message displayed when using /sr set command and providing username of a player that is currently not online
-playerNotonline:
-  #Message displayed when using /sr set command and providing username of a player that is currently not online
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cPlayer is not online!";'
+#playerNotonline: "&4錯誤&8: &c玩家不在線上!"
+playerNotonline: "&4\u932f\u8aa4&8: &c\u73a9\u5bb6\u4e0d\u5728\u7dda\u4e0a!"
 #Message displayed when using /sr drop command
-skinDataDropped: "\"&e[&2SkinsRestorer&e] &2Skin data for player %player dropped.\";"
+#skinDataDropped: "&2刪除了玩家 %player 的外觀。"
+skinDataDropped: "&2\u522a\u9664\u4e86\u73a9\u5bb6 %player \u7684\u5916\u89c0\u3002"
 #Message sent when the /sr reload command execution was successful
-reload: "\"&e[&2SkinsRestorer&e] &2Config and Locale has been reloaded!\";"
+#reload: "&2設定文件和語言設定已重新載入。"
+reload: "&2\u8a2d\u5b9a\u6587\u4ef6\u548c\u8a9e\u8a00\u8a2d\u5b9a\u5df2\u91cd\u65b0\u8f09\u5165\u3002"
 #Message sent to player that is on cooldown when using /skin command too fast without having the skinsrestorer.bypasscooldown permission
-skinCooldownNew:
-  #Message sent to player that is on cooldown when using /skin command too fast without having the skinsrestorer.bypasscooldown permission
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cYou can change your skin again in &e%s &cseconds.";'
+#skinCooldownNew: "&4錯誤&8: &c你可以在 &e%s &c秒後再次更換外觀。"
+skinCooldownNew: "&4\u932f\u8aa4&8: &c\u4f60\u53ef\u4ee5\u5728 &e%s &c\u79d2\u5f8c\u518d\u6b21\u66f4\u63db\u5916\u89c0\u3002"
 #Message sent when a player wants to use a disabled skin without having the skinsrestorer.bypassdisabled permission
-skinDisabled:
-  #Message sent when a player wants to use a disabled skin without having the skinsrestorer.bypassdisabled permission
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cThis skin is disabled by an administrator.";'
-#Unknown
-noSkinData:
-  #Unknown
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cNo skin data acquired! Does this player have a skin?";'
-#When proxy returned skin is empty
-genericError:
-  #When proxy returned skin is empty
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cAn error occurred while requesting skin data, please try again later!";'
+#skinDisabled: "&4錯誤&8: &c這個外觀被遊戲管理員停用"
+skinDisabled: "&4\u932f\u8aa4&8: &c\u9019\u500b\u5916\u89c0\u88ab\u904a\u6232\u7ba1\u7406\u54e1\u505c\u7528"
+#Can not set skin due to player name not being premium or having no skin
+#noSkinData: "&4錯誤&8: &c沒有取得外觀資料！確定這個玩家有自訂外觀嗎？"
+noSkinData: "&4\u932f\u8aa4&8: &c\u6c92\u6709\u53d6\u5f97\u5916\u89c0\u8cc7\u6599\uff01\u78ba\u5b9a\u9019\u500b\u73a9\u5bb6\u6709\u81ea\u8a02\u5916\u89c0\u55ce\uff1f"
 #Cooldown message
-waitMinute:
-  #Cooldown message
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cPlease wait a minute before requesting that skin again. (Rate Limited)";'
+#waitMinute: "&4錯誤&8: &c請稍等一分鐘後再次自訂外觀 (限制次數)"
+waitMinute: "&4\u932f\u8aa4&8: &c\u8acb\u7a0d\u7b49\u4e00\u5206\u9418\u5f8c\u518d\u6b21\u81ea\u8a02\u5916\u89c0 (\u9650\u5236\u6b21\u6578)"
+#When proxy returned skin is empty
+#genericError: "&4錯誤&8: &c在下載外觀時出現錯誤，請稍後再試。"
+genericError: "&4\u932f\u8aa4&8: &c\u5728\u4e0b\u8f09\u5916\u89c0\u6642\u51fa\u73fe\u932f\u8aa4\uff0c\u8acb\u7a0d\u5f8c\u518d\u8a66\u3002"
 #Message sent when server has an outdated version of SR
-outdated:
-  #Message sent when server has an outdated version of SR
-  "\"&e[&2SkinsRestorer&e] &4You are running an outdated version of SkinsRestorer!\n&cPlease update to the latest version": \n&e-> https://skinsrestorer.net/get/latest";
+#outdated: "&4您正在執行一個舊版本的&4 SkinsRestorer!\n&c請在以下網址更新 SkinsRestorer: \n&e-> https://skinsrestorer.net/get/latest"
+outdated: "&4\u60a8\u6b63\u5728\u57f7\u884c\u4e00\u500b\u820a\u7248\u672c\u7684&4 SkinsRestorer!\n&c\u8acb\u5728\u4ee5\u4e0b\u7db2\u5740\u66f4\u65b0 SkinsRestorer: \n&e-> https://skinsrestorer.net/get/latest"
 #Message sent when using a player-only command
-playersOnly: "\"&4These commands are only for players!\";"
+#playersOnly: "&4這條指令只有玩家可以使用！"
+playersOnly: "&4\u9019\u689d\u6307\u4ee4\u53ea\u6709\u73a9\u5bb6\u53ef\u4ee5\u4f7f\u7528\uff01"
 #When none Player try's to set a skin
-notPlayer:
-  #When none Player try's to set a skin
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cYou need to be a player!";'
+#notPlayer: "&4錯誤&8: &c這條指令只有玩家可以使用!"
+notPlayer: "&4\u932f\u8aa4&8: &c\u9019\u689d\u6307\u4ee4\u53ea\u6709\u73a9\u5bb6\u53ef\u4ee5\u4f7f\u7528!"
 #=== GUI ===
 #/skins message
-menuOpen: "\"&2Opening the skins menu...\";"
+#menuOpen: "&2&l打開外觀選擇頁面..."
+menuOpen: "&2&l\u6253\u958b\u5916\u89c0\u9078\u64c7\u9801\u9762..."
 #Previus page [GUI]
-previusPage: "\"&e&l«&7 Previous Page&e&l «\";"
+#previusPage: "&e&l«&7 上一頁&e&l «"
+previusPage: "&e&l«&7 \u4e0a\u4e00\u9801&e&l «"
 #Next page [GUI]
-nextPage: "\"&a&l»&7 Next Page&a&l »\";"
+#nextPage: "&a&l»&7 下一頁&a&l »"
+nextPage: "&a&l»&7 \u4e0b\u4e00\u9801&a&l »"
 #Clear skin [GUI]
-removeSkin: "\"&c&l»&7 Remove Skin&c&l »\";"
+#removeSkin: "&c&l»&7 刪除您的外觀&c&l »"
+removeSkin: "&c&l»&7 \u522a\u9664\u60a8\u7684\u5916\u89c0&c&l »"
 #item lore for skulls [GUI]
-selectSkin: "\"&2Click to select this skin\";"
+#selectSkin: "&2&l點擊選擇此外觀"
+selectSkin: "&2&l\u522a\u9664\u60a8\u7684\u5916\u89c0"
 #=== DEBUG ===
 #old debug
-statusOk: "\"&e[&2SkinsRestorer&e] &2Mojang API connection successful!\";"
+#statusOk: "&2Mojang API 連接成功！"
+statusOk: "&2Mojang API \u9023\u63a5\u6210\u529f\uff01"
 #old debug
-altApiFailed:
-  #old debug
-  "\"&e[&2SkinsRestorer&e] &4Error&8": '&cSkin Data API is overloaded, please try again later!";'
+#altApiFailed: "&4錯誤&8: &c外觀資料 API 過載，請稍後再試。"
+altApiFailed: "&4\u932f\u8aa4&8: &c\u5916\u89c0\u8cc7\u6599 API \u904e\u8f09\uff0c\u8acb\u7a0d\u5f8c\u518d\u8a66\u3002"
 #=== OLD SKIN HELP ===
 #String used as a divider
-line: "\"&7&m----------------------------------------\";"
+line: "&7&m----------------------------------------"
 #Message line sent when requesting SkinsRestorer help without skinsrestorer.cmds permission
 helpPlayer:
   - "    &2&lSkinsRestorer &7- &f&lv%ver%"
   - "    &2/skin set <skinname> &7-&f Changes your skin."
   - "    &2/skin <skinname> &7-&f Shortened version of \"/skin set\"."
-  - '"    &2/skin clear &7-&f Clears your skin.";'
+  - "    &2/skin clear &7-&f Clears your skin."
 #Message line sent when requesting SkinsRestorer help and having skinsrestorer.cmds permission
-help: "\"    &2/sr &7- &fDisplay admin commands.\";"
+help: "    &2/sr &7- &fDisplay admin commands."
 #Message sent when requesting admin help
 help_admin:
   - "&2&lSkinsRestorer &7- &f&lv%ver% &c&lAdmin"
@@ -94,4 +105,4 @@ help_admin:
   - "    &2/sr drop <player> &7- &fDrops player skin data."
   - "    &2/sr clear <player> &7- &fClears player data."
   - "    &2/sr reload &7- &fReloads the config and locale"
-  - '"    &2/sr props [player] &7- &fDisplays the players actual skin as properties";'
+  - "    &2/sr props [player] &7- &fDisplays the players actual skin as properties"
